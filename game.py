@@ -1,7 +1,7 @@
 #this is a simple game of open-hand blackjack intended for two players: a dealer and another player
 #Author: Eli Rosenkim, Last Edited: Sep 6 2024
 #I consulted w3schools.com for a refresher on python syntax but otherwise all work is original
-
+import random
 #define a class for the cards, containing a value and a suit
 class Card:
     def __init__(self, value, suit):
@@ -23,9 +23,34 @@ for i in range(0, 52):
     print(str(dealing_shoe[i].value), str(dealing_shoe[i].suit))
 '''
 
-
-#deal cards to both players
+#declare global variables
 player_1_dealer_hand = []
 player_2_hand = []
+game_ongoing = True
+
+def draw_stage():
+    player_1_dealer_hand.append(dealing_shoe.pop(random.randint(0, len(dealing_shoe))))
+    player_2_hand.append(dealing_shoe.pop(random.randint(0, len(dealing_shoe))))
+
+    print("Player 1 (Dealer)'s hand is: ")
+    for i in range(0, len(player_1_dealer_hand)):
+        print(str(player_1_dealer_hand[i].value), "of", str(player_1_dealer_hand[i].suit))
+    
+    print("Player 2's hand is: ")
+    for i in range(0, len(player_2_hand)):
+        print(str(player_2_hand[i].value), "of", str(player_2_hand[i].suit))
+
+#this conditional loop contains the main game
+while game_ongoing:
+    #deal a random card from the shoe to each player's hand
+    draw_stage()
+    input("player 1 test") # for testing the draw stage
+
+
+
+
+
+
+
 
 
