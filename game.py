@@ -30,26 +30,16 @@ for i in range(0, 52):
     print(str(dealing_shoe[i].value), str(dealing_shoe[i].suit))
 '''
 
-#deal a random card to dealer and print dealer hand
-def dealer_draw():
-    player_1_dealer_hand.append(dealing_shoe.pop(random.randint(0, len(dealing_shoe)-1)))
-    print("Player 1 (Dealer)'s hand is: ")
+#deal a random card and print hand contents given a list (player's hand)
+def draw(player_hand):
+    player_hand.append(dealing_shoe.pop(random.randint(0, len(dealing_shoe)-1)))
     time.sleep(1)#make it feel old
-    for i in range(0, len(player_1_dealer_hand)):
-        print(str(player_1_dealer_hand[i].value), "of", str(player_1_dealer_hand[i].suit))
-        time.sleep(1.2)
-
-#deal random card to player 2, print player 2 hand
-def player_draw():
-    player_2_hand.append(dealing_shoe.pop(random.randint(0, len(dealing_shoe)-1)))
-    print("Player 2's hand is: ")
-    time.sleep(1)
-    for i in range(0, len(player_2_hand)):
-        print(str(player_2_hand[i].value), "of", str(player_2_hand[i].suit))
+    for i in range(0, len(player_hand)):
+        print(str(player_hand[i].value), "of", str(player_hand[i].suit))
         time.sleep(1.2)
 
 
-#tally the amount of points in a player's hand, given a hand list as argument
+#tally the amount of points in a player's hand given a list (player's hand)
 def tally_points(player_hand):
     points = 0
     for i in range(0, len(player_hand)):
@@ -70,8 +60,10 @@ def tally_points(player_hand):
 #initial draw so that each player gets *two* cards at the start of the game
 player_1_dealer_hand.append(dealing_shoe.pop(random.randint(0, len(dealing_shoe)-1)))
 player_2_hand.append(dealing_shoe.pop(random.randint(0, len(dealing_shoe)-1)))
-dealer_draw()
-player_draw()
+print("Player 1 (Dealer) 's hand is :")
+draw(player_1_dealer_hand)
+print("Player 2's hand is :")
+draw(player_2_hand)
 
 #player_1_dealer_hand.append(Card("King", 0)) #blackjack for debug
 #player_1_dealer_hand.append(Card("Ace", 0)) #
@@ -114,7 +106,8 @@ if player_1_dealer_points > 21:
 while True:
     if input("Would you like to hit or stand? Please respond by typing 'hit' or 'stand'") == 'hit':
         time.sleep(1)
-        player_draw()
+        print("Player 2's hand is :")
+        draw(player_2_hand)
         time.sleep(1)
         print("Tallying Player 2's points...")
         time.sleep(2)
@@ -129,7 +122,8 @@ while True:
 
 #Dealer's Turn
 while player_1_dealer_points < 17:
-    dealer_draw()
+    print("Player 1 (Dealer) 's hand is :")
+    draw(player_1_dealer_hand)
     time.sleep(1)
     print("Tallying Player 1 (Dealer) 's points...")
     time.sleep(2)
